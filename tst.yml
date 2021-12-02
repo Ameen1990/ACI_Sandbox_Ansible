@@ -1,0 +1,43 @@
+---
+-  hosts: apic
+   any_errors_fatal: true
+
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: /usr/bin/python3
+ #    tn_name: 'am_tn'
+#     bd: 'am_db'
+  #   status: 'created,modified'
+     #status: 'deleted'
+   #  vrf: 'am-vrf'
+
+   vars_prompt:
+     - name: "apic_ip"
+       prompt: "Enter APIC IP"
+       default: 'sandboxapicdc.cisco.com'
+       private: no
+
+     - name: "user"
+       prompt: "Enter your APIC Username"
+       default: 'admin'
+       unsafe: yes
+
+     - name: "pass"
+       prompt: "Enter your APIC Password"
+       private: yes
+       unsafe: yes
+
+
+   tasks:
+
+   - name: Create a Tenant
+     aci_rest:
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       use_ssl: no
+       validate_certs: false
+
+     aci_tenant: 
+       tenant: am-tn   
+
