@@ -37,24 +37,6 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-<<<<<<< HEAD
-       state: absent
- 
-#     aci_vrf: 
-#       vrf: am-vrf
-#       tenant: am-tn
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-
-#     aci_bd: 
-#       tenant: am-tn
-#       bd: am-bd
-#       vrf: am-vrf
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-=======
 
    - name: create VRF
      aci_vrf: 
@@ -72,4 +54,3 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
->>>>>>> e3945b92bfcab5b4ed87b6bfc56195cde8c8c53c
