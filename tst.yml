@@ -40,3 +40,6 @@
    - name: create a tenant
      aci_tenant: 
        tenant: am-tn
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
