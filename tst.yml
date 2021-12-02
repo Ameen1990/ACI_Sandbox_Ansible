@@ -27,17 +27,13 @@
        private: yes
        unsafe: yes
 
-
    tasks:
-
-   - name: Create a Tenant
+   - name: auth
      aci_rest:
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        use_ssl: no
        validate_certs: false
-
-     aci_tenant: 
-       tenant: am-tn   
-
+    - name: create a tenant
+      aci_tenant: am-tn
