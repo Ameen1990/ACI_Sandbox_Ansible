@@ -5,11 +5,11 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     #tn_name: 'blue'
-     #bd: 'blue_db'
-     #status: 'created,modified'
+     tn_name: 'am_tn'
+     bd: 'am_db'
+     status: 'created,modified'
      #status: 'deleted'
-     #vrf: 'vrf_b_1'
+     vrf: 'am-vrf'
 
    vars_prompt:
      - name: "apic_ip"
