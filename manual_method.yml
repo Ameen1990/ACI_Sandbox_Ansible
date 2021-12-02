@@ -23,13 +23,13 @@
        unsafe: yes
 
    tasks:
-   - name: auth
-     aci_rest:
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
-       path: api/mo/uni.json
+#   - name: auth
+#     aci_rest:
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+#       path: api/mo/uni.json
 
    - name: create a tenant
      aci_tenant: 
