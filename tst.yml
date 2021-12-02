@@ -45,10 +45,10 @@
        username: "{{ user }}"
        password: "{{ pass }}"
 
-     aci_bd: 
-       tenant: am-tn
-       bd: am-bd
-       vrf: am-vrf
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
+#     aci_bd: 
+#       tenant: am-tn
+#       bd: am-bd
+#       vrf: am-vrf
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
