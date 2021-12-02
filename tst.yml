@@ -35,7 +35,7 @@
        password: "{{ pass }}"
        validate_certs: false
        path: api/mo/uni.json
-       method: post
+       #method: post
 
    - name: create a tenant
      aci_tenant: 
