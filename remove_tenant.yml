@@ -22,7 +22,7 @@
        private: yes
        unsafe: yes
 
-#   tasks:
+   tasks:
 #   - name: auth
 #     aci_rest:
 #       host: "{{ inventory_hostname }}"
