@@ -1,0 +1,41 @@
+---
+-  hosts: apic
+   any_errors_fatal: true
+
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: /usr/bin/python3
+
+   vars_prompt:
+     - name: "apic_ip"
+       prompt: "Enter APIC IP"
+       default: 'sandboxapicdc.cisco.com'
+       private: no
+
+     - name: "user"
+       prompt: "Enter your APIC Username"
+       default: 'admin'
+       unsafe: yes
+
+     - name: "pass"
+       prompt: "Enter your APIC Password"
+       private: yes
+       unsafe: yes
+
+#   tasks:
+#   - name: auth
+#     aci_rest:
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+#       path: api/mo/uni.json
+
+
+   - name: Remove a tenant
+     aci_tenant: 
+       tenant: am-tn
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       state: absent
