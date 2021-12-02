@@ -37,7 +37,6 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       state: absent
 
    - name: create VRF
      aci_vrf: 
@@ -46,7 +45,7 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       state: absent
+
    - name: create a Bridge-Domain
      aci_bd: 
        tenant: am-tn
@@ -55,5 +54,3 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       state: absent
-       
