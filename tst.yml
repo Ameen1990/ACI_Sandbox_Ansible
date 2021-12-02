@@ -38,17 +38,19 @@
        username: "{{ user }}"
        password: "{{ pass }}"
 
-#     aci_vrf: 
-#       vrf: am-vrf
-#       tenant: am-tn
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
+   - name: create VRF
+     aci_vrf: 
+       vrf: am-vrf
+       tenant: am-tn
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
 
-#     aci_bd: 
-#       tenant: am-tn
-#       bd: am-bd
-#       vrf: am-vrf
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
+   - name: create a Bridge-Domain
+     aci_bd: 
+       tenant: am-tn
+       bd: am-bd
+       vrf: am-vrf
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
