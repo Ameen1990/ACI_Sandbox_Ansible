@@ -14,7 +14,7 @@
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: 'https://sandboxapicdc.cisco.com/'
+       default: 'sandboxapicdc.cisco.com'
        private: no
 
      - name: "user"
