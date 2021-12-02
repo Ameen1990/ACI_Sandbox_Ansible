@@ -10,6 +10,7 @@
   vars_prompt:
     - name: "apic_ip"
       prompt: "Enter APIC IP"
+      default : 'sandboxapicdc.cisco.com'
       private: yes
 
     - name: "user"
@@ -24,8 +25,8 @@
 
 
   tasks:
-    # - name: Calling User Generation Playbook
-    #   include_tasks: user-generation.yml
+    - name: Calling User Generation Playbook
+      include_tasks: Or_us_g.yml
 
     - name: Query Bridge Domains
       aci_rest:
@@ -35,7 +36,7 @@
         certificate_name: "{{ cert_user }}" 
         use_ssl: yes
         validate_certs: false
-        path: /api/mo/uni/tn-Lumos-Test.json?query-target=subtree&target-subtree-class=fvBD&rsp-subtree=full
+        path: /api/mo/uni/tn-blue.json?query-target=subtree&target-subtree-class=fvBD&rsp-subtree=full
         method: get
       register: bd_response
 

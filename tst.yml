@@ -37,7 +37,8 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-
+       state: absent
+ 
 #     aci_vrf: 
 #       vrf: am-vrf
 #       tenant: am-tn
