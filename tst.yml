@@ -35,4 +35,5 @@
        password: "{{ pass }}"
 
    - name: create a tenant
-     aci_tenant: am-tn
+     aci_tenant: 
+       tenant: am-tn
