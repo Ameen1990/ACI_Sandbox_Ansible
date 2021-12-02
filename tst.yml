@@ -33,6 +33,9 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       validate_certs: false
+       path: api/mo/uni.json
+       method: post
 
    - name: create a tenant
      aci_tenant: 
