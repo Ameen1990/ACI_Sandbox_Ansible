@@ -5,11 +5,6 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
- #    tn_name: 'am_tn'
-#     bd: 'am_db'
-  #   status: 'created,modified'
-     #status: 'deleted'
-   #  vrf: 'am-vrf'
 
    vars_prompt:
      - name: "apic_ip"
@@ -35,7 +30,6 @@
        password: "{{ pass }}"
        validate_certs: false
        path: api/mo/uni.json
-       #method: post
 
    - name: create a tenant
      aci_tenant: 
