@@ -5,11 +5,11 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     tn_name: 'az-Test_pass'
-     bd: 'BD100_az_test_pass'
+     tn_name: '12_2021_t'
+     bd: '12_2021_bd'
      status: 'created,modified'
      #status: 'deleted'
-     vrf: 'az_test_pass_JK-VRF'
+     vrf: '12_2021_vrf'
 
    vars_prompt:
      - name: "apic_ip"
