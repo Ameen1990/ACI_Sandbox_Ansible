@@ -38,12 +38,12 @@
        username: "{{ user }}"
        password: "{{ pass }}"
 
-     aci_vrf: 
-       vrf: am-vrf
-       tenant: am-tn
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
+#     aci_vrf: 
+#       vrf: am-vrf
+#       tenant: am-tn
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
 
 #     aci_bd: 
 #       tenant: am-tn
