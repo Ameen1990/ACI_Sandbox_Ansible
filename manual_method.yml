@@ -1,6 +1,7 @@
 ---
 -  hosts: apic
    any_errors_fatal: true
+   gather_facts: no
 
    vars:
      ansible_connection: local
@@ -23,14 +24,6 @@
        unsafe: yes
 
    tasks:
-#   - name: auth
-#     aci_rest:
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
-#       path: api/mo/uni.json
-
    - name: create a tenant
      aci_tenant: 
        tenant: am-tn
@@ -72,3 +65,15 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+  
+  - name: Add a new EPG
+    cisco.aci.aci_epg:
+      host: "{{ inventory_hostname }}"
+      username: "{{ user }}"
+      password: "{{ pass }}"
+      tenant: am-tn
+      ap: am-ap
+      epg: am-epg
+      description: 
+      bd: am-bd
+
