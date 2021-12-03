@@ -22,7 +22,17 @@
        private: yes
        unsafe: yes
 
+
    tasks:
+    - name: Authentication
+     aci_rest:
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       use_ssl: yes
+       validate_certs: false
+       path: api/mo/uni.json
+ 
    - name: Remove a tenant
      aci_tenant: 
        tenant: am-tn
