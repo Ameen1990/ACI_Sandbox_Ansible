@@ -67,7 +67,7 @@
        password: "{{ pass }}"
   
   - name: Add a new EPG
-    cisco.aci.aci_epg:
+    aci_epg:
       host: "{{ inventory_hostname }}"
       username: "{{ user }}"
       password: "{{ pass }}"
