@@ -68,12 +68,12 @@
   
   - name: Add a new EPG
     aci_epg:
-      host: "{{ inventory_hostname }}"
-      username: "{{ user }}"
-      password: "{{ pass }}"
       tenant: am-tn
       ap: am-ap
       epg: am-epg
-      description: 
+      description: "descrip"
       bd: am-bd
+      host: "{{ inventory_hostname }}"
+      username: "{{ user }}"
+      password: "{{ pass }}"
 
