@@ -9,7 +9,7 @@
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: 'sandboxapicdc.cisco.com'
+       default: 'https://10.10.20.14/'
        private: no
 
      - name: "user"
@@ -23,52 +23,10 @@
        unsafe: yes
 
    tasks:
-#   - name: auth
-#     aci_rest:
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
-#       path: api/mo/uni.json
-
-   - name: create a tenant
+   - name: Remove a tenant
      aci_tenant: 
        tenant: am-tn
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-
-   - name: create VRF
-     aci_vrf: 
-       vrf: am-vrf
-       tenant: am-tn
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-
-   - name: create a Bridge-Domain
-     aci_bd: 
-       tenant: am-tn
-       bd: am-bd
-       vrf: am-vrf
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-
-   - name: create a Bridge-Domain Sub-net
-     aci_bd_subnet: 
-       tenant: am-tn
-       bd: am-bd
-       gateway: 200.1.1.1
-       mask: 24
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-
-   - name: create Application Profile
-     aci_ap: 
-       ap: am-ap
-       tenant: am-tn
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
+       state: absent
