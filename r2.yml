@@ -24,7 +24,7 @@
 
 
    tasks:
-    - name: Authentication
+   - name: Authentication
      aci_rest:
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
