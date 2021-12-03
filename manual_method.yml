@@ -66,14 +66,14 @@
        username: "{{ user }}"
        password: "{{ pass }}"
   
-  - name: Add a new EPG
-    aci_epg:
-      tenant: am-tn
-      ap: am-ap
-      epg: am-epg
-      description: "descrip"
-      bd: am-bd
-      host: "{{ inventory_hostname }}"
-      username: "{{ user }}"
-      password: "{{ pass }}"
+   - name: Add a new EPG
+     aci_epg:
+       tenant: am-tn
+       ap: am-ap
+       epg: am-epg
+       description: "descrip"
+       bd: am-bd
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
 
