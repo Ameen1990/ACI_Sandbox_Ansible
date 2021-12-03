@@ -57,7 +57,7 @@
        username: "{{ user }}"
        password: "{{ pass }}"
 
-- name: create a Bridge-Domain-data_centre
+   - name: create a Bridge-Domain-data_centre
      aci_bd: 
        tenant: am-tn
        bd: am-bd-data_centre
