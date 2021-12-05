@@ -20,6 +20,7 @@
 
      - name: "pass"
        prompt: "Enter your APIC Password"
+       default: '!v3G@!4@Y'
        private: yes
        unsafe: yes
 
@@ -47,7 +48,12 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       subnets:
+         - name: 20.0.1.1
+           mask: 24
+           scope: public
    
+
    - name: create a Bridge-Domain-appserver
      aci_bd: 
        tenant: am-tn
@@ -56,6 +62,11 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       subnets:
+         - name: 10.0.1.1
+           mask: 24
+           scope: public
+
 
    - name: create a Bridge-Domain-data_centre
      aci_bd: 
@@ -69,16 +80,6 @@
          - name: 10.0.2.1
            mask: 24
            scope: public
-
-#   - name: create a Bridge-Domain Sub-net
-#     aci_bd_subnet: 
-#       tenant: am-tn
-#       bd: am-bd
-#       gateway: 200.1.1.1
-#       mask: 24
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
 
 
    - name: create Application Profile
