@@ -10,17 +10,17 @@
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: 'https://10.10.20.14'
+       default: 'devnetsandbox-usw1-reservation.cisco.com:20155'
        private: no
 
      - name: "user"
        prompt: "Enter your APIC Username"
-       default: 'admin'
+       default: 'ameen.azza'
        unsafe: yes
 
      - name: "pass"
        prompt: "Enter your APIC Password"
-       default: 'C1sco12345'
+       default: 'CMRMHZAC'
        private: yes
        unsafe: yes
 
