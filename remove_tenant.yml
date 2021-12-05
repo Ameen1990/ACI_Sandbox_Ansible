@@ -5,6 +5,7 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
+     tn_name: 'am_tn'
 
    vars_prompt:
      - name: "apic_ip"
@@ -25,7 +26,7 @@
    tasks:
    - name: Remove a tenant
      aci_tenant: 
-       tenant: am-tn
+       tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
