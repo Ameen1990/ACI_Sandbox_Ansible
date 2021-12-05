@@ -1,0 +1,34 @@
+---
+-  hosts: apic
+   any_errors_fatal: true
+   gather_facts: no
+
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: /usr/bin/python3
+
+   vars_prompt:
+     - name: "apic_ip"
+       prompt: "Enter APIC IP"
+       default: 'devnetsandbox-usw1-reservation.cisco.com:20155'
+       private: no
+
+     - name: "user"
+       prompt: "Enter your APIC Username"
+       default: 'ameen.azza'
+       unsafe: yes
+
+     - name: "pass"
+       prompt: "Enter your APIC Password"
+       default: 'CMRMHZAC'
+       private: yes
+       unsafe: yes
+
+   tasks:
+   - name: Remove a tenant
+     aci_tenant: 
+       tenant: am-tn
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       state: absent
