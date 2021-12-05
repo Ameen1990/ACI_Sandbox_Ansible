@@ -1,4 +1,3 @@
-
 ---
 -  hosts: apic
    any_errors_fatal: true
@@ -25,6 +24,7 @@
        private: yes
        unsafe: yes
 
+   tasks:
    - name: Remove a tenant
      aci_tenant: 
        tenant: am-tn
