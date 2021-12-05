@@ -3,9 +3,9 @@
    any_errors_fatal: true
    gather_facts: no
 
-   vars:
-     ansible_connection: local
-     ansible_python_interpreter: /usr/bin/python3
+  # vars:
+   #  ansible_connection: local
+    # ansible_python_interpreter: /usr/bin/python3
 
    vars_prompt:
      - name: "apic_ip"
