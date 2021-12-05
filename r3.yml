@@ -15,7 +15,7 @@
 
      - name: "user"
        prompt: "Enter your APIC Username"
-       default: 'ameen.azza'
+       default: 'admin'
        unsafe: yes
 
      - name: "pass"
