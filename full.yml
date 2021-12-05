@@ -6,6 +6,20 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
+     tn_name: 'am_tn'
+     bd_1: 'Web_server'
+     bd_2: 'App_server'
+     bd_3: 'Data_Base'
+     vrf_name: 'am_vrf'
+     ap_name: 'am_ap'
+     l3out_name: 'L3_Out_Element'
+     epg_1: 'Web_Server'
+     epg_2: 'App_Server'
+     epg_3: 'Data_Base'
+     cont_1: 'App_Web'
+     cont_2: 'DB_App'
+     cont_3: 'Web_L3'
+   
 
    vars_prompt:
      - name: "apic_ip"
@@ -20,48 +34,59 @@
 
      - name: "pass"
        prompt: "Enter your APIC Password"
+       default: '!v3G@!4@Y'
        private: yes
        unsafe: yes
 
    tasks:
    - name: create a tenant
      aci_tenant: 
-       tenant: am-tn
+       tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
 
    - name: create VRF
      aci_vrf: 
-       vrf: am-vrf
-       tenant: am-tn
+       vrf: "{{ vrf_name }}"
+       tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
 
-   - name: create a Bridge-Domain-webserver
+   - name: create a Bridge-Domain_webserver
      aci_bd: 
-       tenant: am-tn
-       bd: am-bd-webserver
-       vrf: am-vrf
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_1 }}"
+       vrf: "{{ vrf_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       subnets:
+         - name: 20.0.1.1
+           mask: 24
+           scope: public
    
-   - name: create a Bridge-Domain-appserver
+
+   - name: Create a Bridge-Domain_appserver
      aci_bd: 
-       tenant: am-tn
-       bd: am-bd-appserver
-       vrf: am-vrf
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       vrf: "{{ vrf_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       subnets:
+         - name: 10.0.1.1
+           mask: 24
+           scope: public
 
-   - name: create a Bridge-Domain-data_centre
+
+   - name: create a Bridge-Domain_Data_Base
      aci_bd: 
-       tenant: am-tn
-       bd: am-bd-data_centre
-       vrf: am-vrf
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       vrf: "{{ vrf_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
@@ -70,44 +95,172 @@
            mask: 24
            scope: public
 
-#   - name: create a Bridge-Domain Sub-net
-#     aci_bd_subnet: 
-#       tenant: am-tn
-#       bd: am-bd
-#       gateway: 200.1.1.1
-#       mask: 24
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-
 
    - name: create Application Profile
      aci_ap: 
-       ap: am-ap
-       tenant: am-tn
+       ap: "{{ ap_name }}"
+       tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
   
-   - name: Add a new EPG
+
+   - name: Create EPG-Web
      aci_epg:
-       tenant: am-tn
-       ap: am-ap
-       epg: am-epg
-       description: "descrip"
-       bd: am-bd
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_1 }}"
+       description: "Description of EPG_Web"
+       bd: "{{ db_1 }}"
+       contracts: 
+         - name: "{{ cont_1 }}"
+           type: consumer
+         - name: "{{ cont_3 }}"
+           type: provider
+           
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
 
-#   - name: Add a Contract
-#    aci_contract:
-#      tenant: am-tn
-#      ap: am-ap
-#      epg: am-epg
-#      description: "descrip"
-#      bd: am-bd
-#      host: "{{ inventory_hostname }}"
-#      username: "{{ user }}"
-#      password: "{{ pass }}"
 
+   - name: Create EPG_App
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_2 }}"
+       description: "Description of EPG_App"
+       bd: "{{ bd_2 }}"
+       contracts: 
+         - name: "{{ cont_1 }}" 
+           type: provider
+         - name: "{{ cont_2 }}"
+           type: consumer
+        
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+   - name: Create EPG-database
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_3 }}"
+       description: "Description of epg_database"
+       bd: "{{ bd_3 }}"
+       contracts: 
+         - name: "{{ cont_2 }}"
+           type: provider
+         
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+   - name: Create External EPG
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_4 }}"
+       description: "Description of epg_database"
+       bd: "{{ bd_3 }}"
+         
+  
+   - name: Create External_EPG
+     cisco.mso.mso_schema_template_external_epg:
+       schema: Schema 1
+       template: Template 1
+       external_epg: External EPG 1
+       l3out: "{{ l3out_name }}" 
+       vrf:
+         name: VRF
+         schema: Schema 1
+         template: Template 1
+       contracts: 
+         - name: "{{ cont_3 }}"
+           type: consumer
+   
+
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       
+
+
+   - name: Create L3-Out
+     aci_l3out:
+       tenant: "{{ tn_name }}"
+       name: "{{ l3out_name }}" 
+       description: L3_Out for Production tenant
+       domain: ISR3945
+       vrf: "{{ vrf_name }}"
+       l3protocol: ospf
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+
+   - name: Contract between (App_Server & Web_Server)
+     aci_contract:
+       contract: "{{ cont_1 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between App_Server & web-servers
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+
+
+   - name: Contract between (Data_Base & App_server)
+     aci_contract:
+       contract: "{{ cont_2 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Data_Base & App)
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+# In order to advertise web-server dridger domain to the outside world
+   - name: Contract between (Web_Server & L3)
+     aci_contract:
+       contract: "{{ cont_3 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Web_Server & L3_Out)
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+  
+
+      # web-server :  bd-1
+      # app-server :  bd-2
+      # data_base  :  bd-3
+
+      # vrf _ datacenter
+
+
+
+   - name: Create a VPC member
+     aci_l3out_logical_interface_vpc_member:
+       tenant: "{{ tn_name }}"
+       l3out: "{{ l3out_name }}"
+       logical_node: nodeName
+       logical_interface: eth1/15
+       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
+       side: A
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
