@@ -10,7 +10,7 @@
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: 'https://10.10.20.14/'
+       default: '10.10.20.14'
        private: no
 
      - name: "user"
