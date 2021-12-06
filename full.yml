@@ -40,14 +40,14 @@
 
    tasks:
    - name: create a tenant
-     aci_tenant: 
+     aci_tenant:
        tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
 
    - name: create VRF
-     aci_vrf: 
+     aci_vrf:
        vrf: "{{ vrf_name }}"
        tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
@@ -55,7 +55,7 @@
        password: "{{ pass }}"
 
    - name: create a Bridge-Domain_webserver
-     aci_bd: 
+     aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
        vrf: "{{ vrf_name }}"
@@ -69,7 +69,7 @@
    
 
    - name: Create a Bridge-Domain_appserver
-     aci_bd: 
+     aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_2 }}"
        vrf: "{{ vrf_name }}"
@@ -83,7 +83,7 @@
 
 
    - name: create a Bridge-Domain_Data_Base
-     aci_bd: 
+     aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_3 }}"
        vrf: "{{ vrf_name }}"
@@ -97,7 +97,7 @@
 
 
    - name: create Application Profile
-     aci_ap: 
+     aci_ap:
        ap: "{{ ap_name }}"
        tenant: "{{ tn_name }}"
        host: "{{ inventory_hostname }}"
