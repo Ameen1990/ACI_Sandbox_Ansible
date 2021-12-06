@@ -19,7 +19,10 @@ Topology: -
 
 -	Three EPGs 
 -	Every EPG is associated with a bridge domain
--	Two contracts were created
-  o	Cont_1: filters traffic between Web_servre & App_Server
-  o	Cont_2: filters traffic between App_Server & Data_Base
+-	Two contracts were created: 
+
+
+  Cont_1: filters traffic between Web_servre & App_Server
+
+  Cont_2: filters traffic between App_Server & Data_Base
  
