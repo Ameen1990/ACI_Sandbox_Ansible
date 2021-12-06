@@ -1,14 +1,14 @@
 ---
--  hosts: apic
+-  hosts: sbx_iosxe
    any_errors_fatal: true
    gather_facts: no
 
    vars:
-     ansible_connection: local
+ #    ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
      tn_name: 'am_tn'
 
-     #ansible_connection: network_cli
+     ansible_connection: network_cli
      ansible_become: yes
      ansible_become_method: enable
      ansible_network_os: ios
@@ -18,7 +18,7 @@
      netconf_port: 830
 
    vars_prompt:
-     - name: "apic_ip"
+     - name: "iosxe_ip"
        prompt: "Enter APIC IP"
        default: 'sandbox-iosxe-latest-1.cisco.com'
        private: no

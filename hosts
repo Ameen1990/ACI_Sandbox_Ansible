@@ -1,2 +1,8 @@
 [apic]
 "{{ apic_ip }}" 
+
+[sbx_iosxe]
+"{{ iosxe_ip }}"
+
+
+
