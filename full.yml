@@ -83,7 +83,7 @@
        subnets:
          - name: 10.0.1.1
            mask: 24
-           scope: public
+           scope: private
 
 
    - name: create a Bridge-Domain_Data_Base
@@ -97,7 +97,7 @@
        subnets:
          - name: 10.0.2.1
            mask: 24
-           scope: public
+           scope: private
 
 
    - name: create Application Profile
