@@ -52,7 +52,7 @@
        password: "{{ pass }}"
    
    - name: Create EPGs
-     aci_epgs:
+     aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
        epgs:
