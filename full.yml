@@ -7,15 +7,20 @@
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
      tn_name: 'am_tn'
+     
      bd_1: 'Web_server'
      bd_2: 'App_server'
      bd_3: 'Data_Base'
+     
      vrf_name: 'am_vrf'
      ap_name: 'am_ap'
      l3out_name: 'L3_Out_Element'
+     
      epg_1: 'Web_Server'
      epg_2: 'App_Server'
      epg_3: 'Data_Base'
+     epg_4: 'External_EPG'
+
      cont_1: 'App_Web'
      cont_2: 'DB_App'
      cont_3: 'Web_L3'
@@ -156,23 +161,12 @@
        password: "{{ pass }}"
 
 
-   - name: Create External EPG
-     aci_epg:
-       tenant: "{{ tn_name }}"
-       ap: "{{ ap_name }}"
-       bd: "{{ bd_3 }}"
-         
-  
    - name: Create External_EPG
-     aci_external_epg:
-#       schema: Schema 1
-#       template: Template 1
-       external_epg: "{{ epg_4 }}"
+     aci_l3out_extepg:
+       nmae: "{{ epg_4 }}"
        l3out: "{{ l3out_name }}" 
-       vrf: 
-         name: "{{ vrf_name }}"
-#         schema: Schema 1
-#         template: Template 1
+       vrf: "{{ vrf_name }}"
+
        contracts: 
          - name: "{{ cont_3 }}"
            type: consumer
