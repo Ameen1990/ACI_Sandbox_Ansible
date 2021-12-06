@@ -67,7 +67,6 @@
            mask: 24
            scope: public
    
-
    - name: Create a Bridge-Domain_appserver
      aci_bd:
        tenant: "{{ tn_name }}"
@@ -130,7 +129,7 @@
        epg: "{{ epg_2 }}"
        description: "Description of EPG_App"
        bd: "{{ bd_2 }}"
-       contracts: 
+       contracts:
          - name: "{{ cont_1 }}" 
            type: provider
          - name: "{{ cont_2 }}"
@@ -148,7 +147,7 @@
        epg: "{{ epg_3 }}"
        description: "Description of epg_database"
        bd: "{{ bd_3 }}"
-       contracts: 
+       contracts:
          - name: "{{ cont_2 }}"
            type: provider
          
