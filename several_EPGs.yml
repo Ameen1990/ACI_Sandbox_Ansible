@@ -44,6 +44,7 @@
        unsafe: yes
 
    tasks:
+
    - name: create a tenant
      aci_tenant:
        tenant: "{{ tn_name }}"
@@ -51,6 +52,67 @@
        username: "{{ user }}"
        password: "{{ pass }}"
    
+   - name: create Application Profile
+     aci_ap:
+       ap: "{{ ap_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+  
+
+   - name: create VRF
+     aci_vrf:
+       vrf: "{{ vrf_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+   - name: create a Bridge-Domain_webserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_1 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       subnets:
+         - name: 20.0.1.1
+           mask: 24
+           scope: public
+
+
+   - name: Create a Bridge-Domain_appserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       subnets:
+         - name: 10.0.1.1
+           mask: 24
+           scope: public
+
+
+   - name: create a Bridge-Domain_Data_Base
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       subnets:
+         - name: 10.0.2.1
+           mask: 24
+           scope: public
+
+
+
    - name: Create EPGs
      aci_epg:
        tenant: "{{ tn_name }}"
@@ -76,7 +138,7 @@
                type: consumer
        
          - name: "{{ epg_3 }}"
-           description: "Description of epg_database"
+           description: "Description of EPG_Data-Base"
            bd: "{{ bd_3 }}"
            contracts:
              - name: "{{ cont_2 }}"
@@ -100,3 +162,82 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+
+
+
+   - name: Create L3-Out
+     aci_l3out:
+       tenant: "{{ tn_name }}"
+       name: "{{ l3out_name }}" 
+       description: L3_Out for Production tenant
+       domain: ISR3945
+       vrf: "{{ vrf_name }}"
+       l3protocol: ospf
+
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+
+   - name: Contract between (App_Server & Web_Server)
+     aci_contract:
+       contract: "{{ cont_1 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between App_Server & web-servers
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+
+
+   - name: Contract between (Data_Base & App_server)
+     aci_contract:
+       contract: "{{ cont_2 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Data_Base & App)
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+# In order to advertise web-server dridger domain to the outside world
+   - name: Contract between (Web_Server & L3-out)
+     aci_contract:
+       contract: "{{ cont_3 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Web_Server & L3_Out)
+       scope: tenant
+       filter: default
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+  
+
+      # web-server :  bd-1
+      # app-server :  bd-2
+      # data_base  :  bd-3
+
+      # vrf _ datacenter
+
+
+#   - name: Create a VPC member
+#     aci_vpc_member:
+#       tenant: "{{ tn_name }}"
+#       l3out: "{{ l3out_name }}"
+#       logical_node: nodeName
+#       logical_interface: eth1/15
+#       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
+#       side: A
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
