@@ -164,7 +164,7 @@
          
   
    - name: Create External_EPG
-     cisco.mso.mso_schema_template_external_epg:
+     aci_external_epg:
 #       schema: Schema 1
 #       template: Template 1
        external_epg: "{{ epg_4 }}"
