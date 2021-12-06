@@ -251,7 +251,7 @@
 
 
    - name: Create a VPC member
-     aci_l3out_logical_interface_vpc_member:
+     aci_vpc_member:
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}"
        logical_node: nodeName
