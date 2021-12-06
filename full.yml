@@ -163,24 +163,23 @@
        bd: "{{ bd_3 }}"
          
   
-#   - name: Create External_EPG
-#     cisco.mso.mso_schema_template_external_epg:
+   - name: Create External_EPG
+     cisco.mso.mso_schema_template_external_epg:
 #       schema: Schema 1
 #       template: Template 1
-#       external_epg: "{{ epg_4 }}"
-#       l3out: "{{ l3out_name }}" 
-#       vrf:
-#         name: VRF
+       external_epg: "{{ epg_4 }}"
+       l3out: "{{ l3out_name }}" 
+       vrf: 
+         name: "{{ vrf_name }}"
 #         schema: Schema 1
 #         template: Template 1
-#       contracts: 
-#         - name: "{{ cont_3 }}"
-#           type: consumer
-   
+       contracts: 
+         - name: "{{ cont_3 }}"
+           type: consumer
 
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
        
 
 
