@@ -249,17 +249,15 @@
       # vrf _ datacenter
 
 
-'''
-   - name: Create a VPC member
-     aci_vpc_member:
-       tenant: "{{ tn_name }}"
-       l3out: "{{ l3out_name }}"
-       logical_node: nodeName
-       logical_interface: eth1/15
-       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
-       side: A
-       state: present
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-'''
+#   - name: Create a VPC member
+#     aci_vpc_member:
+#       tenant: "{{ tn_name }}"
+#       l3out: "{{ l3out_name }}"
+#       logical_node: nodeName
+#       logical_interface: eth1/15
+#       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
+#       side: A
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
