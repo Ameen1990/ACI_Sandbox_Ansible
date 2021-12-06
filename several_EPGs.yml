@@ -1,0 +1,100 @@
+---
+-  hosts: apic
+   any_errors_fatal: true
+   gather_facts: no
+
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: /usr/bin/python3
+     tn_name: 'am_tn'
+     
+     bd_1: 'Web_server'
+     bd_2: 'App_server'
+     bd_3: 'Data_Base'
+
+     vrf_name: 'am_vrf'
+     ap_name: 'am_ap'
+     l3out_name: 'L3_Out_Element'
+
+     epg_1: 'Web_Server'
+     epg_2: 'App_Server'
+     epg_3: 'Data_Base'
+     epg_4: 'External_EPG'
+
+     cont_1: 'App_Web'
+     cont_2: 'DB_App'
+     cont_3: 'Web_L3'
+
+
+   vars_prompt:
+     - name: "apic_ip"
+       prompt: "Enter APIC IP"
+       default: 'sandboxapicdc.cisco.com'
+       private: no
+
+     - name: "user"
+       prompt: "Enter your APIC Username"
+       default: 'admin'
+       unsafe: yes
+
+     - name: "pass"
+       prompt: "Enter your APIC Password"
+       default: '!v3G@!4@Y'
+       private: yes
+       unsafe: yes
+
+   tasks:
+   - name: create a tenant
+     aci_tenant:
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+   
+   - name: Create EPGs
+     aci_epgs:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       - epg: "{{ epg_1 }}"
+         description: "Description of EPG_Web"
+         bd: "{{ db_1 }}"
+         contracts: 
+           - name: "{{ cont_1 }}"
+             type: consumer
+           - name: "{{ cont_3 }}"
+             type: provider
+       
+       - epg: "{{ epg_2 }}"
+         description: "Description of EPG_App"
+         bd: "{{ db_2 }}"
+         contracts: 
+           - name: "{{ cont_1 }}"
+             type: provider
+           - name: "{{ cont_2 }}"
+             type: consumer
+       
+       - epg: "{{ epg_3 }}"
+         description: "Description of epg_database"
+         bd: "{{ bd_3 }}"
+         contracts:
+           - name: "{{ cont_2 }}"
+             type: provider
+
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
+
+  - name: Create External_EPG
+     aci_l3out_extepg:
+       nmae: "{{ epg_4 }}"
+       l3out: "{{ l3out_name }}" 
+       vrf: "{{ vrf_name }}"
+
+       contracts: 
+         - name: "{{ cont_3 }}"
+           type: consumer
+
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
