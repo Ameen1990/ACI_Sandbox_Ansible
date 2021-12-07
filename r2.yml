@@ -2,8 +2,7 @@
 -  hosts: apic
    any_errors_fatal: true
    gather_facts: no
-   validate_certs: false
-
+   
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
@@ -31,6 +30,7 @@
    - name: Remove a tenant
      aci_tenant: 
        tenant: "{{ tn_name }}"
+       validate_certs: false
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
