@@ -166,25 +166,25 @@
                type: consumer
              - name: "{{ cont_3 }}"
                type: provider
-       
-
-         - name: "{{ epg_2 }}"
-           description: "Description of EPG_App"
-           bd: "{{ bd_2 }}"
-           contracts: 
-             - name: "{{ cont_1 }}"
-               type: provider
-             - name: "{{ cont_2 }}"
-               type: consumer
-       
-         - name: "{{ epg_3 }}"
-           description: "Description of EPG_Data-Base"
-           bd: "{{ bd_3 }}"
-           contracts:
-             - name: "{{ cont_2 }}"
-               type: provider
-
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+       
+
+#         - name: "{{ epg_2 }}"
+#           description: "Description of EPG_App"
+#           bd: "{{ bd_2 }}"
+#           contracts: 
+#             - name: "{{ cont_1 }}"
+#               type: provider
+#             - name: "{{ cont_2 }}"
+#               type: consumer
+#       
+#         - name: "{{ epg_3 }}"
+#           description: "Description of EPG_Data-Base"
+#           bd: "{{ bd_3 }}"
+#           contracts:
+#             - name: "{{ cont_2 }}"
+#               type: provider
+
