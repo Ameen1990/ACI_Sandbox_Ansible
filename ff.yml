@@ -2,7 +2,8 @@
 -  hosts: apic
    any_errors_fatal: true
    gather_facts: no
-   
+   deprecation_warnings: False 
+
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
@@ -111,22 +112,24 @@
        password: "{{ pass }}"
        scope: private
        validate_certs: false
-
-
-
-
-   - name: create a subnet for Bridge-Domain_webserver
-     aci_bd_subnet:
-       name: "{{ sub_1 }}"
-       tenant: "{{ tn_name }}"
-       bd: "{{ bd_1 }}"
        gateway_ip: 20.0.1.1
        subnet_mask: 24
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
        
+
+
+
+#   - name: create a subnet for Bridge-Domain_webserver
+#     aci_bd_subnet:
+#       name: "{{ sub_1 }}"
+#       tenant: "{{ tn_name }}"
+#       bd: "{{ bd_1 }}"
+#       gateway_ip: 20.0.1.1
+#       subnet_mask: 24
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+#       
 #   - name: create a subnet for Bridge-Domain_App-server
 #     aci_bd_subnet:
 #       name: "{{ sub_2 }}"
