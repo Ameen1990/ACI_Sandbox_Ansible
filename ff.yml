@@ -2,7 +2,6 @@
 -  hosts: apic
    any_errors_fatal: true
    gather_facts: no
-   deprecation_warnings: False 
 
    vars:
      ansible_connection: local
