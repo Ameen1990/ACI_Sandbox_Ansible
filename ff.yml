@@ -221,14 +221,11 @@
      aci_contract_subject:
        tenant: "{{ tn_name }}"
        description: Communication between App_Server & web-servers
-#       scope: tenant
-       provider_match: "{{ epg_2 }}"
-       consumer_match: "{{ epg_1 }}"
+       provider_match: all
        contract: "{{ cont_1 }}"
-#       subject: default
+       subject: "{{ epg_2 }}"
        reverse_filter: yes
        priority: level1
- #      dscp: unspecified
 
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
