@@ -72,3 +72,18 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+   - name: create a Bridge-Domain_webserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_1 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       subnets:
+         - name: 20.0.1.1
+           mask: 24
+           scope: public
+
