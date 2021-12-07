@@ -157,15 +157,14 @@
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
-       epg:
-         - name: "{{ epg_1 }}"
-           description: "Description of EPG_Web"
-           bd: "{{ bd_1 }}"
-           contracts: 
-             - name: "{{ cont_1 }}"
-               type: consumer
-             - name: "{{ cont_3 }}"
-               type: provider
+       epg: "{{ epg_1 }}"
+       description: "Description of EPG_Web"
+       bd: "{{ bd_1 }}"
+       contracts:
+         - name: "{{ cont_1 }}"
+         - type: consumer
+         - name: "{{ cont_3 }}"
+         - type: provider
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
