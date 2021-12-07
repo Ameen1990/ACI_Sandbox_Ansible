@@ -27,7 +27,7 @@
 
    tasks:
 
-   - name: Remove a tenant
+   - name: Create a tenant
      aci_tenant: 
        tenant: "{{ tn_name }}"
        validate_certs: false
