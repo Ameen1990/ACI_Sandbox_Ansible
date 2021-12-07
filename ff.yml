@@ -73,15 +73,28 @@
        password: "{{ pass }}"
        validate_certs: false
 
-   - name: create a Bridge-Domain_webserver
-     aci_bd:
+#   - name: create a Bridge-Domain_webserver
+#     aci_bd:
+#       tenant: "{{ tn_name }}"
+#       bd: "{{ bd_1 }}"
+#       vrf: "{{ vrf_name }}"
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+#       gateway_ip: 20.0.1.1
+#       subnet_mask: 24
+#       scope: public
+
+   - name: create a subnet Bridge-Domain_webserver
+     aci_bd_subnet:
+       name: "Web_sServer_Subnet"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
-       vrf: "{{ vrf_name }}"
+       gateway: 20.0.1.1
+       mask: 24
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
-       gateway_ip: 20.0.1.1
-       subnet_mask: 24
-       scope: public
+       
