@@ -224,7 +224,21 @@
        contract: "{{ cont_1 }}"
        subject: "{{ epg_2 }}"
        reverse_filter: yes
-       priority: level1
+
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: Add a new contract subject
+     aci_contract_subject:
+       tenant: "{{ tn_name }}"
+       description: Communication between App_Server & web-servers
+       consumer_match: all
+       contract: "{{ cont_1 }}"
+       subject: "{{ epg_1 }}"
+       reverse_filter: yes
 
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
