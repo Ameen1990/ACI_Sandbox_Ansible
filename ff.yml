@@ -179,6 +179,19 @@
        validate_certs: false
  
 
+   - name: Create EPG_Data_Base
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_3 }}"
+       description: "Description of EPG_Data_Base"
+       bd: "{{ bd_3 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
 #         - name: "{{ epg_2 }}"
 #           description: "Description of EPG_App"
 #           bd: "{{ bd_2 }}"
