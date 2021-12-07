@@ -226,7 +226,6 @@
        consumer_match: "{{ epg_1 }}"
        contract: "{{ cont_1 }}"
 #       subject: default
-       description: test
        reverse_filter: yes
        priority: level1
  #      dscp: unspecified
