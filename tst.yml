@@ -15,16 +15,16 @@
 
      vrf_name: 'am_vrf'
      ap_name: 'am_ap'
-     l3out_name: 'L3_Out_Element'
+     l3out_name: 'L3_Out_Device'
 
      epg_1: 'Web_Server'
      epg_2: 'App_Server'
      epg_3: 'Data_Base'
      epg_4: 'External_EPG'
 
-     cont_1: 'App_Web'
-     cont_2: 'DB_App'
-     cont_3: 'Web_L3'
+     cont_1: 'C_App_Web'
+     cont_2: 'C_DB_App'
+     cont_3: 'C_Web_L3'
 
 
    vars_prompt:
@@ -121,7 +121,7 @@
        epgs:
          - name: "{{ epg_1 }}"
            description: "Description of EPG_Web"
-           bd: "{{ db_1 }}"
+           bd: "{{ bd_1 }}"
            contracts: 
              - name: "{{ cont_1 }}"
                type: consumer
@@ -131,7 +131,7 @@
 
          - name: "{{ epg_2 }}"
            description: "Description of EPG_App"
-           bd: "{{ db_2 }}"
+           bd: "{{ bd_2 }}"
            contracts: 
              - name: "{{ cont_1 }}"
                type: provider
@@ -179,8 +179,8 @@
          - area: 0
          - node_id: leaf-101
          - router_id: 101.101.101.101
-         - interface: eth1/15
-         - ip: 221.221.221.2
+         - interface: eth1/15     # interface between Leaf-101 and the router
+         - ip: 221.221.221.2      # supposed router IP on the other side 
          - mask: 30
          - interface_policy: default
          - mtu: inherit
@@ -218,7 +218,7 @@
        password: "{{ pass }}"
 
 
-# In order to advertise web-server dridger domain to the outside world
+# In order to advertise web-server bridge-domain to the outside world
    - name: Contract between (Web_Server & L3-out)
      aci_contract:
        contract: "{{ cont_3 }}"
