@@ -1,6 +1,8 @@
 ---
 -  hosts: apic
    any_errors_fatal: true
+   gather_facts: no
+   validate_certs: false
 
    vars:
      ansible_connection: local
@@ -14,7 +16,7 @@
 
      - name: "user"
        prompt: "Enter your APIC Username"
-       default: 'admin'
+       default: 'ameen.azza'
        unsafe: yes
 
      - name: "pass"
