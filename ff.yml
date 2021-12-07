@@ -166,7 +166,7 @@
        validate_certs: false
        
 
-   - name: Create EPGs
+   - name: Create EPG_App_Server
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -199,20 +199,44 @@
 
 
 
-   - name: Contract between (App_Server & Web_Server)
-     aci_contract:
-       contract: "{{ cont_1 }}"
+#   - name: Contract between (App_Server & Web_Server)
+#     aci_contract:
+#       contract: "{{ cont_1 }}"
+#       tenant: "{{ tn_name }}"
+#       description: Communication between App_Server & web-servers
+#       scope: tenant
+#       filter: default
+#       state: present
+#       provider: "{{ epg_2 }}"
+#       consumer: "{{ epg_1 }}"
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
+
+
+
+   - name: Add a new contract subject
+     aci_contract_subject:
        tenant: "{{ tn_name }}"
        description: Communication between App_Server & web-servers
        scope: tenant
-       filter: default
-       state: present
-       provider: "{{ epg_2 }}"
-       consumer: "{{ epg_1 }}"
+       provider_match: "{{ epg_2 }}"
+       consumer_match: "{{ epg_1 }}"
+       contract: "{{ cont_1 }}"
+#       subject: default
+       description: test
+       reverse_filter: yes
+       priority: level1
+ #      dscp: unspecified
+
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+
 
 
 
