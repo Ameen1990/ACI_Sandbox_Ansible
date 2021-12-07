@@ -16,12 +16,12 @@
 
      - name: "user"
        prompt: "Enter your APIC Username"
-       default: 'admin'
+       default: 'ameen.azza'
        unsafe: yes
 
      - name: "pass"
        prompt: "Enter your APIC Password"
-       default: 'C1sco12345'
+       default: 'QMTAXVNT'
        private: yes
        unsafe: yes
 
@@ -34,4 +34,4 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       state: present
+       state: absent
