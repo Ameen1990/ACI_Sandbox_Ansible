@@ -61,6 +61,7 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       validate_certs: false
   
 
    - name: create VRF
@@ -70,3 +71,4 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
+       validate_certs: false
