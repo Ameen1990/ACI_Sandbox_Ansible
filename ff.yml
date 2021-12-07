@@ -157,7 +157,7 @@
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
-       epgs:
+       epg:
          - name: "{{ epg_1 }}"
            description: "Description of EPG_Web"
            bd: "{{ bd_1 }}"
