@@ -199,20 +199,19 @@
 
 
 
-#   - name: Contract between (App_Server & Web_Server)
-#     aci_contract:
-#       contract: "{{ cont_1 }}"
-#       tenant: "{{ tn_name }}"
-#       description: Communication between App_Server & web-servers
-#       scope: tenant
-#       filter: default
-#       state: present
+   - name: Contract between (App_Server & Web_Server)
+     aci_contract:
+       contract: "{{ cont_1 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between App_Server & web-servers
+       scope: tenant
+       filter: default
 #       provider: "{{ epg_2 }}"
 #       consumer: "{{ epg_1 }}"
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
 
 
 
