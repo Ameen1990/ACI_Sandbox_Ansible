@@ -116,7 +116,7 @@
 
 
    - name: create a subnet for Bridge-Domain_webserver
-     aci_subnet:
+     aci_bd_subnet:
        name: "{{ sub_1 }}"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
