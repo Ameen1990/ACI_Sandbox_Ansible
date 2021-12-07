@@ -205,7 +205,7 @@
        tenant: "{{ tn_name }}"
        description: Communication between App_Server & web-servers
        scope: tenant
-       filter: default
+#       filter: default
 #       provider: "{{ epg_2 }}"
 #       consumer: "{{ epg_1 }}"
        host: "{{ inventory_hostname }}"
