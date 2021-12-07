@@ -181,8 +181,9 @@
          - router_id: 101.101.101.101
          - interface: eth1/15
          - ip: 221.221.221.2
-         - mask: 24
+         - mask: 30
          - interface_policy: default
+         - mtu: inherit
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
