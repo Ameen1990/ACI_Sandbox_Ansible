@@ -160,16 +160,29 @@
        epg: "{{ epg_1 }}"
        description: "Description of EPG_Web"
        bd: "{{ bd_1 }}"
-       contracts:
-         - name: "{{ cont_1 }}"
-         - type: consumer
-         - name: "{{ cont_3 }}"
-         - type: provider
+#       contracts:
+#         - name: "{{ cont_1 }}"
+#         - type: consumer
+#         - name: "{{ cont_3 }}"
+#         - type: provider
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
        
+
+  - name: Create EPGs
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_2 }}"
+       description: "Description of EPG_App"
+       bd: "{{ bd_2 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+ 
 
 #         - name: "{{ epg_2 }}"
 #           description: "Description of EPG_App"
@@ -187,3 +200,52 @@
 #             - name: "{{ cont_2 }}"
 #               type: provider
 
+
+
+
+
+   - name: Contract between (App_Server & Web_Server)
+     aci_contract:
+       contract: "{{ cont_1 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between App_Server & web-servers
+       scope: tenant
+       filter: default
+       state: present
+       provider: "{{ epg_2 }}"
+       consumer: "{{ epg_1 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+#   - name: Contract between (Data_Base & App_server)
+#     aci_contract:
+#       contract: "{{ cont_2 }}"
+#       tenant: "{{ tn_name }}"
+#       description: Communication between Data_Base & App)
+#       scope: tenant
+#       filter: default
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
+
+# In order to advertise web-server bridge-domain to the outside world
+#   - name: Contract between (Web_Server & L3-out)
+#     aci_contract:
+#       contract: "{{ cont_3 }}"
+#       tenant: "{{ tn_name }}"
+#       description: Communication between Web_Server & L3_Out)
+#       scope: tenant
+#       filter: default
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+  
