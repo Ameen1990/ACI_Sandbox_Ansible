@@ -221,7 +221,7 @@
      aci_contract_subject:
        tenant: "{{ tn_name }}"
        description: Communication between App_Server & web-servers
-       scope: tenant
+#       scope: tenant
        provider_match: "{{ epg_2 }}"
        consumer_match: "{{ epg_1 }}"
        contract: "{{ cont_1 }}"
