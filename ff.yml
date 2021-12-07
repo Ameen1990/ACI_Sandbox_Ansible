@@ -11,7 +11,11 @@
      bd_1: 'Web_server'
      bd_2: 'App_server'
      bd_3: 'Data_Base'
-
+   
+     sub_1: 'Web_server_sub'
+     sub_2: 'App_server_sub'
+     sub_3: 'Data_Base_sub'
+     
      vrf_name: 'am_vrf'
      ap_name: 'am_ap'
      l3out_name: 'L3_Out_Device'
@@ -82,13 +86,39 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
-#       gateway_ip: 20.0.1.1
-#       subnet_mask: 24
-#       scope: public
+       scope: public
+
+   - name: Create a Bridge-Domain_appserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       scope: private
+       validate_certs: false
+
+
+   - name: create a Bridge-Domain_Data_Base
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       subnets:
+       scope: private
+       validate_certs: false
+
+
+
+
 
    - name: create a subnet for Bridge-Domain_webserver
      aci_bd_subnet:
-       name: "Web_sServer_Subnet"
+       name: "{{ sub_1 }}""
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
        gateway: 20.0.1.1
@@ -98,3 +128,27 @@
        password: "{{ pass }}"
        validate_certs: false
        
+   - name: create a subnet for Bridge-Domain_App-server
+     aci_bd_subnet:
+       name: "{{ sub_2 }}""
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       gateway: 10.0.1.1
+       mask: 24
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: create a subnet for Bridge-Domain_Data-Base
+     aci_bd_subnet:
+       name: "{{ sub_3 }}""
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       gateway: 10.0.2.1
+       mask: 24
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
