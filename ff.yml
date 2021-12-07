@@ -118,7 +118,7 @@
 
    - name: create a subnet for Bridge-Domain_webserver
      aci_bd_subnet:
-       name: "{{ sub_1 }}""
+       name: "{{ sub_1 }}"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
        gateway: 20.0.1.1
@@ -130,7 +130,7 @@
        
    - name: create a subnet for Bridge-Domain_App-server
      aci_bd_subnet:
-       name: "{{ sub_2 }}""
+       name: "{{ sub_2 }}"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_2 }}"
        gateway: 10.0.1.1
@@ -143,7 +143,7 @@
 
    - name: create a subnet for Bridge-Domain_Data-Base
      aci_bd_subnet:
-       name: "{{ sub_3 }}""
+       name: "{{ sub_3 }}"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_3 }}"
        gateway: 10.0.2.1
