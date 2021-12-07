@@ -34,4 +34,4 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       state: absent
+       state: present
