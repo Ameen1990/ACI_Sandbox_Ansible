@@ -52,6 +52,7 @@
    - name: Create a tenant
      aci_tenant: 
        tenant: "{{ tn_name }}"
+       description: "First Tenant_Code_Challenge"
        validate_certs: false
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -108,10 +109,8 @@
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-       subnets:
        scope: private
        validate_certs: false
-
 
 
 
