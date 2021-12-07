@@ -6,7 +6,7 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     tn_name: 'SnV'
+     tn_name: 'am_tn'
      
      bd_1: 'Web_server'
      bd_2: 'App_server'
