@@ -17,12 +17,12 @@
 
      - name: "user"
        prompt: "Enter your APIC Username"
-       default: 'ameen.azza'
+       default: 'admin'
        unsafe: yes
 
      - name: "pass"
        prompt: "Enter your APIC Password"
-       default: 'QMTAXVNT'
+       default: 'C1sco12345'
        private: yes
        unsafe: yes
 
