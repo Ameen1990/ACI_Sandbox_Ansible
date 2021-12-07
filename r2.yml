@@ -1,6 +1,5 @@
 ---
 -  hosts: apic
-   any_errors_fatal: true
    gather_facts: no
    validate_certs: false
 
