@@ -7,6 +7,24 @@
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
      tn_name: 'am_tn'
+     
+     bd_1: 'Web_server'
+     bd_2: 'App_server'
+     bd_3: 'Data_Base'
+
+     vrf_name: 'am_vrf'
+     ap_name: 'am_ap'
+     l3out_name: 'L3_Out_Device'
+
+     epg_1: 'Web_Server'
+     epg_2: 'App_Server'
+     epg_3: 'Data_Base'
+     epg_4: 'External_EPG'
+
+     cont_1: 'C_App_Web'
+     cont_2: 'C_DB_App'
+     cont_3: 'C_Web_L3'
+
 
    vars_prompt:
      - name: "apic_ip"
@@ -35,3 +53,20 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        state: present
+   
+   - name: create Application Profile
+     aci_ap:
+       ap: "{{ ap_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+  
+
+   - name: create VRF
+     aci_vrf:
+       vrf: "{{ vrf_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
