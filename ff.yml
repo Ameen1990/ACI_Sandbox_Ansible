@@ -140,8 +140,8 @@
        validate_certs: false
 
 
-  - name: create a subnet for Bridge-Domain_Data-Base
-    aci_bd_subnet:
+   - name: create a subnet for Bridge-Domain_Data-Base
+     aci_bd_subnet:
        name: "{{ sub_3 }}"
        tenant: "{{ tn_name }}"
        bd: "{{ bd_3 }}"
