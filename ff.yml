@@ -166,7 +166,7 @@
        validate_certs: false
        
 
-  - name: Create EPGs
+   - name: Create EPGs
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
