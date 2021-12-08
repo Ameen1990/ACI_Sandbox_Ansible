@@ -351,7 +351,7 @@
 
 
    - name: Bind Contract_3 with External EPG_4 Consumer
-     tags: cont, L3
+     tags: cont,L3
      aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}" 
@@ -362,6 +362,9 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+
+# aci_l3out_extepg_to_contract
 
 
 #   - name: Configure Contract_3 EPG Consumer
