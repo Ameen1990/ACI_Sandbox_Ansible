@@ -61,6 +61,7 @@
        state: present
    
    - name: create Application Profile
+     tags: ap
      aci_ap:
        ap: "{{ ap_name }}"
        tenant: "{{ tn_name }}"
@@ -71,6 +72,7 @@
   
 
    - name: create VRF
+     tags: vrf
      aci_vrf:
        vrf: "{{ vrf_name }}"
        tenant: "{{ tn_name }}"
@@ -80,6 +82,7 @@
        validate_certs: false
 
    - name: create a Bridge-Domain_webserver
+     tags: bd
      aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_1 }}"
@@ -91,6 +94,7 @@
        scope: public
 
    - name: Create a Bridge-Domain_appserver
+     tags: bd
      aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_2 }}"
@@ -103,6 +107,7 @@
 
 
    - name: create a Bridge-Domain_Data_Base
+     tags: bd
      aci_bd:
        tenant: "{{ tn_name }}"
        bd: "{{ bd_3 }}"
@@ -116,6 +121,7 @@
 
 
    - name: create a subnet for Bridge-Domain_webserver
+     tags: bd,sub
      aci_bd_subnet:
        name: "{{ sub_1 }}"
        tenant: "{{ tn_name }}"
@@ -129,6 +135,7 @@
        validate_certs: false
        
    - name: create a subnet for Bridge-Domain_App-server
+     tags: bd,sub
      aci_bd_subnet:
        name: "{{ sub_2 }}"
        tenant: "{{ tn_name }}"
@@ -142,6 +149,7 @@
 
 
    - name: create a subnet for Bridge-Domain_Data-Base
+     tags: bd,sub
      aci_bd_subnet:
        name: "{{ sub_3 }}"
        tenant: "{{ tn_name }}"
@@ -156,6 +164,7 @@
 
 
    - name: Create EPG_Web_Server
+     tags: epg
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -169,6 +178,7 @@
        
 
    - name: Create EPG_App_Server
+     tags: epg
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -182,6 +192,7 @@
  
 
    - name: Create EPG_Data_Base
+     tags: epg
      aci_epg:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -289,7 +300,6 @@
        domain: "{{ L3_domain }}"
        vrf: "{{ vrf_name }}"
        l3protocol: ospf
-#       regular_area: 0
        route_control: export
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -298,7 +308,7 @@
 
 
    - name: Create External_EPG
-     tags: cont, L3
+     tags: L3,extepg
      aci_l3out_extepg:
        extepg: "{{ epg_4 }}"
        tenant: "{{ tn_name }}"
@@ -310,16 +320,16 @@
        validate_certs: false
 
 
-   - name: Add a new physical domain
-     tags: cont, L3
-     aci_domain:
-       domain: "{{ L3_domain }}"
-       domain_type: vmm
-       vm_provider: vmware
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
+#   - name: Add a new physical domain
+#     tags: L3,extepg
+#     aci_domain:
+#       domain: "{{ L3_domain }}"
+#       domain_type: vmm
+#       vm_provider: vmware
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
 
 
 # In order to advertise web-server bridge-domain to the outside world
@@ -352,7 +362,7 @@
 
 
    - name: Bind Contract_3 to an External EPG_4 Consumer
-     tags: cont, L3
+     tags: cont,L3,extepg
      cisco.aci.aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        extepg: "{{ epg_4 }}"
