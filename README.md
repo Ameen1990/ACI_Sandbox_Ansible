@@ -40,3 +40,22 @@ Create contract (cont_3) between EPG_4 and the Web_server (EPG_1) in order to ad
 
 Screen shots are attached in Issues section.
 	
+
+Cisco Sandbox details: -
+https://devnetsandbox.cisco.com/
+
+Cisco sandobx reservable ACI similator was used where one book it (max 6 hours) with total dedication to the user.
+it is recommended solution for testing purposes only , coz you will loose your configuration after the 6 hours limit.
+
+Prerequsite: -
+
+Download cisco AnyConnect VPN client from here: https://developer.cisco.com/site/sandbox/anyconnect/ or from Microsfot Store.
+After clicking reserve, you will recieve two emails, the second one has the vpn credenials.
+Once you logged in, your APIC is availabe at 
+
+IP: https://10.10.20.14
+user:admin
+pass: C1sco12345
+
+Note: those credentials are fixed for all reservable ACI simulators.
+
