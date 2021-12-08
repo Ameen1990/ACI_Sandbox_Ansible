@@ -1,0 +1,265 @@
+---
+-  hosts: apic
+   any_errors_fatal: true
+   gather_facts: no
+
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: /usr/bin/python3
+     tn_name: 'am_tn'
+     
+     bd_1: 'Web_server'
+     bd_2: 'App_server'
+     bd_3: 'Data_Base'
+   
+     sub_1: 'Web_server_sub'
+     sub_2: 'App_server_sub'
+     sub_3: 'Data_Base_sub'
+     
+     vrf_name: 'am_vrf'
+     ap_name: 'am_ap'
+     l3out_name: 'L3_Out_Device'
+
+     epg_1: 'Web_Server'
+     epg_2: 'App_Server'
+     epg_3: 'Data_Base'
+     epg_4: 'External_EPG'
+
+     cont_1: 'C_App_Web'
+     cont_2: 'C_DB_App'
+     cont_3: 'C_Web_L3'
+
+
+   vars_prompt:
+     - name: "apic_ip"
+       prompt: "Enter APIC IP"
+       default: '10.10.20.14'
+       private: no
+
+     - name: "user"
+       prompt: "Enter your APIC Username"
+       default: 'admin'
+       unsafe: yes
+
+     - name: "pass"
+       prompt: "Enter your APIC Password"
+       default: 'C1sco12345'
+       private: yes
+       unsafe: yes
+
+   tasks:
+
+   - name: Create a tenant
+     aci_tenant: 
+       tenant: "{{ tn_name }}"
+       description: "First Tenant_Code_Challenge"
+       validate_certs: false
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       state: present
+   
+   - name: create Application Profile
+     aci_ap:
+       ap: "{{ ap_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+  
+
+   - name: create VRF
+     aci_vrf:
+       vrf: "{{ vrf_name }}"
+       tenant: "{{ tn_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+   - name: create a Bridge-Domain_webserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_1 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       scope: public
+
+   - name: Create a Bridge-Domain_appserver
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       scope: private
+
+
+   - name: create a Bridge-Domain_Data_Base
+     aci_bd:
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       vrf: "{{ vrf_name }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       scope: private
+
+
+
+   - name: create a subnet for Bridge-Domain_webserver
+     aci_bd_subnet:
+       name: "{{ sub_1 }}"
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_1 }}"
+       gateway_ip: 20.0.1.1
+       subnet_mask: 24
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       
+   - name: create a subnet for Bridge-Domain_App-server
+     aci_bd_subnet:
+       name: "{{ sub_2 }}"
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_2 }}"
+       gateway_ip: 10.0.1.1
+       subnet_mask: 24
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: create a subnet for Bridge-Domain_Data-Base
+     aci_bd_subnet:
+       name: "{{ sub_3 }}"
+       tenant: "{{ tn_name }}"
+       bd: "{{ bd_3 }}"
+       gateway_ip: 10.0.2.1
+       subnet_mask: 24
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+   - name: Create EPG_Web_Server
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_1 }}"
+       description: "Description of EPG_Web"
+       bd: "{{ bd_1 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+       
+
+   - name: Create EPG_App_Server
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_2 }}"
+       description: "Description of EPG_App"
+       bd: "{{ bd_2 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+ 
+
+   - name: Create EPG_Data_Base
+     aci_epg:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_3 }}"
+       description: "Description of EPG_Data_Base"
+       bd: "{{ bd_3 }}"
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+
+#   - name: Contract between (App_Server & Web_Server)
+#     aci_contract:
+#       contract: "{{ cont_1 }}"
+#       tenant: "{{ tn_name }}"
+#       ap: "{{ ap_name }}"
+#       description: Communication between App_Server & Web-servers
+#       scope: tenant
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
+
+   - name: Add a new contract to EPG binding
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_2 }}"
+       contract:  "{{ cont_1 }}"
+       contract_type: provider
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+   - name: Add a new contract to EPG binding
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_1 }}"
+       contract:  "{{ cont_1 }}"
+       contract_type: consumer
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+#   - name: Contract between (Data_Base & App_server)
+#     aci_contract:
+#       contract: "{{ cont_2 }}"
+#       tenant: "{{ tn_name }}"
+#       description: Communication between Data_Base & App)
+#       scope: tenant
+#       filter: default
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
+
+# In order to advertise web-server bridge-domain to the outside world
+#   - name: Contract between (Web_Server & L3-out)
+#     aci_contract:
+#       contract: "{{ cont_3 }}"
+#       tenant: "{{ tn_name }}"
+#       description: Communication between Web_Server & L3_Out)
+#       scope: tenant
+#       filter: default
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+  
