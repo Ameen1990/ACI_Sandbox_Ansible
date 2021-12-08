@@ -6,7 +6,7 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     tn_name: 'am_tn'
+     tn_name: 'Ameen_Mit_Bonus_Tenant'
      
      bd_1: 'Web_server'
      bd_2: 'App_server'
@@ -53,7 +53,7 @@
      tags: always
      aci_tenant: 
        tenant: "{{ tn_name }}"
-       description: "First Tenant_Code_Challenge"
+       description: "Second Tenant_Code_Challenge"
        validate_certs: false
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -122,6 +122,7 @@
        bd: "{{ bd_1 }}"
        gateway_ip: 20.0.1.1
        subnet_mask: 24
+       scope: public    # so that it can be advertised externally through L3-out
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
@@ -222,19 +223,6 @@
        validate_certs: false
 
 
-# In order to advertise web-server bridge-domain to the outside world
-   - name: Contract between (Web_Server & L3-out)
-     tags: cont
-     aci_contract:
-       contract: "{{ cont_3 }}"
-       tenant: "{{ tn_name }}"
-       description: Communication between Web_Server & L3_Out)
-       scope: tenant
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
-
 
    - name: Configure Contract_1 EPG Provider
      tags: cont
@@ -292,6 +280,61 @@
        validate_certs: false
 
 
+   - name: Create L3-Out
+     tags: L3
+     aci_l3out:
+       tenant: "{{ tn_name }}"
+       l3out: "{{ l3out_name }}" 
+       description: L3_Out for Production tenant
+       domain: "{{ L3_domain }}"
+       vrf: "{{ vrf_name }}"
+       l3protocol: ospf
+       route_control: export
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: Create External_EPG
+     tags: L3
+     aci_l3out_extepg:
+       extepg: "{{ epg_4 }}"
+       tenant: "{{ tn_name }}"
+       l3out: "{{ l3out_name }}" 
+       description: External EPG which to be associated with the L3-out
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: Add a new physical domain
+     tags: L3
+     aci_domain:
+       domain: "{{ L3_domain }}"
+       domain_type: vmm
+       vm_provider: vmware
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+# In order to advertise web-server bridge-domain to the outside world
+   - name: Contract between (Web_Server & L3-out)
+     tags: cont
+     aci_contract:
+       contract: "{{ cont_3 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Web_Server & L3_Out)
+       scope: tenant
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
    - name: Configure Contract_3 EPG Provider
      tags: cont
      aci_epg_to_contract:
@@ -319,62 +362,3 @@
        password: "{{ pass }}"
        validate_certs: false
 
-
-   - name: Create External_EPG
-     tags: L3
-     aci_l3out_extepg:
-       extepg: "{{ epg_4 }}"
-       tenant: "{{ tn_name }}"
-       ap: "{{ ap_name }}"
-       l3out: "{{ l3out_name }}" 
-       description: External EPG which to be associated with the L3-out
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
-
-
-   - name: Create L3-Out
-     tags: L3
-     aci_l3out:
-       tenant: "{{ tn_name }}"
-       l3out: "{{ l3out_name }}" 
-       description: L3_Out for Production tenant
-       domain: "{{ L3_domain }}"
-       vrf: "{{ vrf_name }}"
-       l3protocol: ospf
-       route_control: export
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
-
-
-    
-
-   - name: Add a new physical domain
-     tags: L3
-     aci_domain:
-       domain: "{{ L3_domain }}"
-       domain_type: vmm
-       vm_provider: vmware
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
-    
-
-# In order to advertise web-server bridge-domain to the outside world
-#   - name: Contract between (Web_Server & L3-out)
-#     tags: cont
-#     aci_contract:
-#       contract: "{{ cont_3 }}"
-#       tenant: "{{ tn_name }}"
-#       description: Communication between Web_Server & L3_Out)
-#       scope: tenant
-#       filter: default
-#       state: present
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
