@@ -50,6 +50,7 @@
    tasks:
 
    - name: Create a tenant
+     tags: always
      aci_tenant: 
        tenant: "{{ tn_name }}"
        description: "First Tenant_Code_Challenge"
@@ -195,10 +196,10 @@
 
 
    - name: Contract between (App_Server & Web_Server)
+     tags: contracts
      aci_contract:
        contract: "{{ cont_1 }}"
        tenant: "{{ tn_name }}"
-       ap: "{{ ap_name }}"
        description: Communication between App_Server & Web-servers
        scope: tenant
        host: "{{ inventory_hostname }}"
@@ -208,6 +209,7 @@
 
 
    - name: Add a new contract to EPG binding
+     tags: contracts
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -222,6 +224,7 @@
 
 
    - name: Add a new contract to EPG binding
+     tags: contracts
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -236,6 +239,7 @@
 
 
 #   - name: Contract between (Data_Base & App_server)
+#     tags: contracts
 #     aci_contract:
 #       contract: "{{ cont_2 }}"
 #       tenant: "{{ tn_name }}"
@@ -251,6 +255,7 @@
 
 # In order to advertise web-server bridge-domain to the outside world
 #   - name: Contract between (Web_Server & L3-out)
+#     tags: contracts
 #     aci_contract:
 #       contract: "{{ cont_3 }}"
 #       tenant: "{{ tn_name }}"
