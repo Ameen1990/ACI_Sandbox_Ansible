@@ -356,6 +356,7 @@
      cisco.aci.aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        extepg: "{{ epg_4 }}"
+       l3out: "{{ l3out_name }}" 
        contract:  "{{ cont_3 }}"
        contract_type: consumer
        host: "{{ inventory_hostname }}"
