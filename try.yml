@@ -196,7 +196,7 @@
 
 
    - name: Contract between (App_Server & Web_Server)
-     tags: contracts
+     tags: cont
      aci_contract:
        contract: "{{ cont_1 }}"
        tenant: "{{ tn_name }}"
@@ -210,7 +210,7 @@
 
 
    - name: Contract between (Data_Base & App_server)
-     tags: contracts
+     tags: cont
      aci_contract:
        contract: "{{ cont_2 }}"
        tenant: "{{ tn_name }}"
@@ -224,7 +224,7 @@
 
 
    - name: Configure Contract_1 EPG Provider
-     tags: contracts
+     tags: cont
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -238,7 +238,7 @@
 
 
    - name: Configure Contract_1 EPG consumer
-     tags: contracts
+     tags: cont
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -252,7 +252,7 @@
 
 
    - name: Configure Contract_2 EPG Provider
-     tags: contracts
+     tags: cont
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -266,7 +266,7 @@
 
 
    - name: Configure Contract_2 EPG Consumer
-     tags: contracts
+     tags: cont
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -281,7 +281,7 @@
 
 
    - name: Create L3-Out
-     tags: l3
+     tags: L3
      aci_l3out:
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}" 
@@ -297,12 +297,11 @@
 
 
    - name: Create External_EPG
-     tags: l3
+     tags: L3
      aci_l3out_extepg:
        extepg: "{{ epg_4 }}"
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}" 
-       vrf: "{{ vrf_name }}"
        description: External EPG which to be associated with the L3-out
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -314,7 +313,7 @@
 
 # In order to advertise web-server bridge-domain to the outside world
 #   - name: Contract between (Web_Server & L3-out)
-#     tags: contracts
+#     tags: cont
 #     aci_contract:
 #       contract: "{{ cont_3 }}"
 #       tenant: "{{ tn_name }}"
