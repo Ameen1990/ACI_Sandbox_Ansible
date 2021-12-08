@@ -336,18 +336,18 @@
        validate_certs: false
 
 
-   - name: Configure Contract_3 EPG_1 Provider
-     tags: cont, L3
-     aci_epg_to_contract:
-       tenant: "{{ tn_name }}"
-       ap: "{{ ap_name }}"
-       epg: "{{ epg_1 }}"
-       contract:  "{{ cont_3 }}"
-       contract_type: provider
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
+#   - name: Configure Contract_3 EPG_1 Provider
+#     tags: cont, L3
+#     aci_epg_to_contract:
+#       tenant: "{{ tn_name }}"
+#       ap: "{{ ap_name }}"
+#       epg: "{{ epg_1 }}"
+#       contract:  "{{ cont_3 }}"
+#       contract_type: provider
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
 
 
 
@@ -362,9 +362,6 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
-
-
-# aci_l3out_extepg_to_contract
 
 
 #   - name: Configure Contract_3 EPG Consumer
