@@ -289,7 +289,7 @@
        domain: "{{ L3_domain }}"
        vrf: "{{ vrf_name }}"
        l3protocol: ospf
-       regular_area: 0
+#       regular_area: 0
        route_control: export
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -352,6 +352,7 @@
 
 
    - name: Bind Contract_3 to an External EPG_4 Consumer
+     tags: cont, L3
      cisco.aci.aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        extepg: "{{ epg_4 }}"
