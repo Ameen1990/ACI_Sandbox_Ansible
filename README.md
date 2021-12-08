@@ -57,5 +57,7 @@ IP: https://10.10.20.14
 user:admin
 pass: C1sco12345
 
-Note: those credentials are fixed for all reservable ACI simulators.
+Notes: 
+- Those credentials are fixed for all reservable ACI simulators.
+- The webiste is expected to be under maintinance starting from 11/12/2021.
 
