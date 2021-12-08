@@ -6,12 +6,11 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     tn_name: 'am_tn'
 
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: '10.10.20.14'
+       default: 'sandboxapicdc.cisco.com'
        private: no
 
      - name: "user"
@@ -21,16 +20,18 @@
 
      - name: "pass"
        prompt: "Enter your APIC Password"
-       default: 'C1sco12345'
        private: yes
        unsafe: yes
 
-   tasks:
+     - name: "tn_name"
+       prompt: "Enter Tenant Name"
+       default: 'Ameen_Mit_Bonus_Tenant'
+       private: no
 
+   tasks:
    - name: Remove a tenant
-     aci_tenant: 
+     aci_tenant:
        tenant: "{{ tn_name }}"
-       validate_certs: false
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
