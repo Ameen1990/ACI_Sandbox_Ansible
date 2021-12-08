@@ -350,12 +350,12 @@
        validate_certs: false
 
 
-   - name: Bind Contract_3 with External EPG_4 Consumer
-     tags: cont,L3
+
+   - name: pleasework
+     tags: cont, L3
      aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
-       l3out: "{{ l3out_name }}" 
-       extepg : "{{ epg_4 }}"
+       extepg: "{{ epg_4 }}"
        contract:  "{{ cont_3 }}"
        contract_type: consumer
        host: "{{ inventory_hostname }}"
