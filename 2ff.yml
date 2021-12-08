@@ -194,17 +194,17 @@
 
 
 
-#   - name: Contract between (App_Server & Web_Server)
-#     aci_contract:
-#       contract: "{{ cont_1 }}"
-#       tenant: "{{ tn_name }}"
-#       ap: "{{ ap_name }}"
-#       description: Communication between App_Server & Web-servers
-#       scope: tenant
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
+   - name: Contract between (App_Server & Web_Server)
+     aci_contract:
+       contract: "{{ cont_1 }}"
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       description: Communication between App_Server & Web-servers
+       scope: tenant
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
 
 
    - name: Add a new contract to EPG binding
