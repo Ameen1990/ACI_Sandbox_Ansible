@@ -6,7 +6,7 @@
    vars:
      ansible_connection: local
      ansible_python_interpreter: /usr/bin/python3
-     tn_name: 'am_tn'
+     tn_name: 'SnV'
 
    vars_prompt:
      - name: "apic_ip"
