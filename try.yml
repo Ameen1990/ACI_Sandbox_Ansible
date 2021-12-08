@@ -320,7 +320,18 @@
        validate_certs: false
 
 
-
+   - name: Create External_EPG
+     tags: L3
+     aci_l3out_extepg:
+       extepg: "{{ epg_4 }}"
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       l3out: "{{ l3out_name }}" 
+       description: External EPG which to be associated with the L3-out
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
 
 
    - name: Create L3-Out
@@ -339,18 +350,8 @@
        validate_certs: false
 
 
-   - name: Create External_EPG
-     tags: L3
-     aci_l3out_extepg:
-       extepg: "{{ epg_4 }}"
-       tenant: "{{ tn_name }}"
-       l3out: "{{ l3out_name }}" 
-       description: External EPG which to be associated with the L3-out
-       host: "{{ inventory_hostname }}"
-       username: "{{ user }}"
-       password: "{{ pass }}"
-       validate_certs: false
     
+
    - name: Add a new physical domain
      tags: L3
      aci_domain:
