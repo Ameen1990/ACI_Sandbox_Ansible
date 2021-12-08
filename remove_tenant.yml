@@ -10,7 +10,7 @@
    vars_prompt:
      - name: "apic_ip"
        prompt: "Enter APIC IP"
-       default: 'sandboxapicdc.cisco.com'
+       default: '10.10.20.14'
        private: no
 
      - name: "user"
@@ -20,6 +20,7 @@
 
      - name: "pass"
        prompt: "Enter your APIC Password"
+       default: 'C1sco12345'
        private: yes
        unsafe: yes
 
@@ -36,3 +37,5 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        state: absent
+       validate_certs: false
+ 
