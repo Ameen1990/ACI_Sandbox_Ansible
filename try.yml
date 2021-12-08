@@ -28,7 +28,7 @@
      cont_1: 'C_App_Web'
      cont_2: 'C_DB_App'
      cont_3: 'C_Web_L3'
-
+     L3_domain: 'ISR3945'
 
    vars_prompt:
      - name: "apic_ip"
@@ -329,7 +329,7 @@
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}" 
        description: L3_Out for Production tenant
-       domain: ISR3945
+       domain: "{{ L3_domain }}"
        vrf: "{{ vrf_name }}"
        l3protocol: ospf
        route_control: export
@@ -351,8 +351,16 @@
        password: "{{ pass }}"
        validate_certs: false
     
-
-
+   - name: Add a new physical domain
+     tags: L3
+     aci_domain:
+       domain: "{{ L3_domain }}"
+       domain_type: vmm
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+    
 
 # In order to advertise web-server bridge-domain to the outside world
 #   - name: Contract between (Web_Server & L3-out)
