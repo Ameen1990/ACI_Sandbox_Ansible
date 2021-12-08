@@ -284,11 +284,12 @@
      tags: l3
      aci_l3out:
        tenant: "{{ tn_name }}"
-       name: "{{ l3out_name }}" 
+       l3out: "{{ l3out_name }}" 
        description: L3_Out for Production tenant
        domain: ISR3945
        vrf: "{{ vrf_name }}"
        l3protocol: ospf
+       route_control: export
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
