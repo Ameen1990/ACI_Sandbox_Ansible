@@ -208,7 +208,22 @@
        validate_certs: false
 
 
-   - name: Add a new contract to EPG binding
+
+   - name: Contract between (Data_Base & App_server)
+     tags: contracts
+     aci_contract:
+       contract: "{{ cont_2 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Data_Base & App)
+       scope: tenant
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+
+   - name: Configure Contract_1 EPG Provider
      tags: contracts
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
@@ -222,8 +237,7 @@
        validate_certs: false
 
 
-
-   - name: Add a new contract to EPG binding
+   - name: Configure Contract_1 EPG consumer
      tags: contracts
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
@@ -237,20 +251,33 @@
        validate_certs: false
 
 
+   - name: Configure Contract_2 EPG Provider
+     tags: contracts
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_3 }}"
+       contract:  "{{ cont_2 }}"
+       contract_type: provider
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
 
-#   - name: Contract between (Data_Base & App_server)
-#     tags: contracts
-#     aci_contract:
-#       contract: "{{ cont_2 }}"
-#       tenant: "{{ tn_name }}"
-#       description: Communication between Data_Base & App)
-#       scope: tenant
-#       filter: default
-#       state: present
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
+
+   - name: Configure Contract_2 EPG Consumer
+     tags: contracts
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_2 }}"
+       contract:  "{{ cont_2 }}"
+       contract_type: consumer
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
 
 
 # In order to advertise web-server bridge-domain to the outside world
