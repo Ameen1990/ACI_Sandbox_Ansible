@@ -289,6 +289,7 @@
        domain: "{{ L3_domain }}"
        vrf: "{{ vrf_name }}"
        l3protocol: ospf
+       regular_area: 0
        route_control: export
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
@@ -297,7 +298,7 @@
 
 
    - name: Create External_EPG
-     tags: L3
+     tags: cont, L3
      aci_l3out_extepg:
        extepg: "{{ epg_4 }}"
        tenant: "{{ tn_name }}"
@@ -310,7 +311,7 @@
 
 
    - name: Add a new physical domain
-     tags: L3
+     tags: cont, L3
      aci_domain:
        domain: "{{ L3_domain }}"
        domain_type: vmm
@@ -323,7 +324,7 @@
 
 # In order to advertise web-server bridge-domain to the outside world
    - name: Contract between (Web_Server & L3-out)
-     tags: cont
+     tags: cont, L3
      aci_contract:
        contract: "{{ cont_3 }}"
        tenant: "{{ tn_name }}"
@@ -335,8 +336,8 @@
        validate_certs: false
 
 
-   - name: Configure Contract_3 EPG Provider
-     tags: cont
+   - name: Configure Contract_3 EPG_1 Provider
+     tags: cont, L3
      aci_epg_to_contract:
        tenant: "{{ tn_name }}"
        ap: "{{ ap_name }}"
@@ -349,15 +350,30 @@
        validate_certs: false
 
 
-   - name: Configure Contract_3 EPG Consumer
-     tags: cont
-     aci_epg_to_contract:
+   - name: Bind Contract_3 with External EPG_4 Consumer
+     tags: cont, L3
+     aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
-       ap: "{{ ap_name }}"
-       epg: "{{ epg_4 }}"
+       l3out: "{{ l3out_name }}" 
+       extepg : "{{ epg_4 }}"
        contract:  "{{ cont_3 }}"
        contract_type: consumer
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+
+#   - name: Configure Contract_3 EPG Consumer
+#     tags: cont, L3
+#     aci_epg_to_contract:
+#       tenant: "{{ tn_name }}"
+#       ap: "{{ ap_name }}"
+#       epg: "{{ epg_4 }}"
+#       contract:  "{{ cont_3 }}"
+#       contract_type: consumer
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
