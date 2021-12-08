@@ -222,6 +222,19 @@
        validate_certs: false
 
 
+# In order to advertise web-server bridge-domain to the outside world
+   - name: Contract between (Web_Server & L3-out)
+     tags: cont
+     aci_contract:
+       contract: "{{ cont_3 }}"
+       tenant: "{{ tn_name }}"
+       description: Communication between Web_Server & L3_Out)
+       scope: tenant
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
 
    - name: Configure Contract_1 EPG Provider
      tags: cont
@@ -277,6 +290,36 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+
+   - name: Configure Contract_3 EPG Provider
+     tags: cont
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_1 }}"
+       contract:  "{{ cont_3 }}"
+       contract_type: provider
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
+   - name: Configure Contract_3 EPG Consumer
+     tags: cont
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_4 }}"
+       contract:  "{{ cont_3 }}"
+       contract_type: consumer
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
 
 
 
