@@ -1,7 +1,7 @@
 # coding_challenge
 This is a coding challenge to build an Ansible-Playbook that goes inside APIC and build the whole topology (Tenant, VRF, Bridge-Domains, EPGs, Application Profiles, Contracts, etc.) and some extra features.
 
-Note: 2 images are attached in Issues section.
+Note: screen-shots are attached in Issues section.
 
 
 Phase I
