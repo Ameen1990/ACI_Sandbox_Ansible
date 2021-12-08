@@ -280,6 +280,21 @@
 
 
 
+   - name: Create L3-Out
+     tags: l3
+     aci_l3out:
+       tenant: "{{ tn_name }}"
+       name: "{{ l3out_name }}" 
+       description: L3_Out for Production tenant
+       domain: ISR3945
+       vrf: "{{ vrf_name }}"
+       l3protocol: ospf
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
+
+
 # In order to advertise web-server bridge-domain to the outside world
 #   - name: Contract between (Web_Server & L3-out)
 #     tags: contracts
