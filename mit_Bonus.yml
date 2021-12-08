@@ -352,7 +352,6 @@
 
 
    - name: pleasework
-     tags: cont, L3
      aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        extepg: "{{ epg_4 }}"
