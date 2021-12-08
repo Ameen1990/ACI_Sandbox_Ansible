@@ -336,22 +336,22 @@
        validate_certs: false
 
 
-#   - name: Configure Contract_3 EPG_1 Provider
-#     tags: cont, L3
-#     aci_epg_to_contract:
-#       tenant: "{{ tn_name }}"
-#       ap: "{{ ap_name }}"
-#       epg: "{{ epg_1 }}"
-#       contract:  "{{ cont_3 }}"
-#       contract_type: provider
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
+   - name: Bind Contract_3 to EPG_1 Provider
+     tags: cont, L3
+     aci_epg_to_contract:
+       tenant: "{{ tn_name }}"
+       ap: "{{ ap_name }}"
+       epg: "{{ epg_1 }}"
+       contract:  "{{ cont_3 }}"
+       contract_type: provider
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+       validate_certs: false
 
 
 
-   - name: pleasework
+   - name: Bind Contract_3 to an External EPG_4 Consumer
      cisco.aci.aci_l3out_extepg_to_contract:
        tenant: "{{ tn_name }}"
        extepg: "{{ epg_4 }}"
@@ -361,18 +361,4 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
-
-
-#   - name: Configure Contract_3 EPG Consumer
-#     tags: cont, L3
-#     aci_epg_to_contract:
-#       tenant: "{{ tn_name }}"
-#       ap: "{{ ap_name }}"
-#       epg: "{{ epg_4 }}"
-#       contract:  "{{ cont_3 }}"
-#       contract_type: consumer
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
 
