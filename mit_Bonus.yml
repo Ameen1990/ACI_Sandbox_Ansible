@@ -371,7 +371,6 @@
        switch_1_id: 101
        switch_2_id: 102
        # Switches 101 & 102 are already pre-discovered by APIC
-       description: "Combining Switch 1 & 2 virtually together in one Virtuall_Port_Channel"
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
