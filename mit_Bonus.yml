@@ -320,18 +320,6 @@
        validate_certs: false
 
 
-#   - name: Add a new physical domain
-#     tags: L3,extepg
-#     aci_domain:
-#       domain: "{{ L3_domain }}"
-#       domain_type: vmm
-#       vm_provider: vmware
-#       host: "{{ inventory_hostname }}"
-#       username: "{{ user }}"
-#       password: "{{ pass }}"
-#       validate_certs: false
-
-
 # In order to advertise web-server bridge-domain to the outside world
    - name: Contract between (Web_Server & L3-out)
      tags: cont, L3
@@ -373,4 +361,20 @@
        username: "{{ user }}"
        password: "{{ pass }}"
        validate_certs: false
+
+
+   - name: Create a VPC member
+     tags: vpc
+     aci_vpc_member:
+       tenant: "{{ tn_name }}"
+       l3out: "{{ l3out_name }}"
+       logical_node: nodeName
+       logical_interface: eth1/15
+       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
+       side: A
+       state: present
+       host: "{{ inventory_hostname }}"
+       username: "{{ user }}"
+       password: "{{ pass }}"
+
 
