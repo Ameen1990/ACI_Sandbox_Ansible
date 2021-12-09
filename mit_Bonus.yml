@@ -365,7 +365,7 @@
 
    - name: Create a VPC member
      tags: vpc
-     aci_vpc_member:
+     cisco.aci.aci_vpc_member:
        tenant: "{{ tn_name }}"
        l3out: "{{ l3out_name }}"
        logical_node: nodeName
