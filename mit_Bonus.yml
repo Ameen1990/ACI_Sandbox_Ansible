@@ -363,18 +363,30 @@
        validate_certs: false
 
 
-   - name: Create a VPC member
+#   - name: Create a VPC member
+#     tags: vpc
+#     aci_vpc_member:
+#       tenant: "{{ tn_name }}"
+#       l3out: "{{ l3out_name }}"
+#       logical_node: nodeName
+#       logical_interface: eth1/15
+#       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
+#       side: A
+#       state: present
+#       host: "{{ inventory_hostname }}"
+#       username: "{{ user }}"
+#       password: "{{ pass }}"
+#       validate_certs: false
+
+
+   - name: Add vPC Protection Group
      tags: vpc
-     cisco.aci.aci_vpc_member:
-       tenant: "{{ tn_name }}"
-       l3out: "{{ l3out_name }}"
-       logical_node: nodeName
-       logical_interface: eth1/15
-       path_dn: topology/pod-1/protpaths-101-102/pathep-[policy_group_name]
-       side: A
-       state: present
+     aci_switch_policy_vpc_protection_group:
+       protection_group: vpc_group
+       protection_group_id: 6
+       switch_1_id: 101
+       switch_2_id: 102
        host: "{{ inventory_hostname }}"
        username: "{{ user }}"
        password: "{{ pass }}"
-
-
+       validate_certs: false
