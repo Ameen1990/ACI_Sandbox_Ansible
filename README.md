@@ -59,7 +59,19 @@ Screen shots are attached in Issues section.
 
 
 
-Cisco Sandbox details: -
+The Cisco Sandbox APIC is an online testing environment hosted by Cisco.
+
+Login data:
+
+Hostname: https://sandboxapicdc.cisco.com/
+
+User: admin
+
+Password: !v3G@!4@Y
+
+
+Another solution is presented here:-
+
 https://devnetsandbox.cisco.com/
 
 log in with CISCo ID or Gmail account.
@@ -84,5 +96,3 @@ pass: C1sco12345
 
 Notes: -
 - Those credentials are fixed for all reservable ACI simulators.
-- The webiste is expected to be under maintinance starting from 11/12/2021.
-
